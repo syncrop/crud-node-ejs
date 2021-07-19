@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+const mimeTypes = require('mime-types');
 const router = express.Router();
 
 const Mascota = require('../models/mascota'); //Modelo
@@ -15,15 +17,27 @@ router.get('/', async(req, res) => {
             //     {id: 'jfasdfasdf', nombre: 'toos', descripcion: 'toos descripcion'},
             // ]
         })
+
     } catch (error) {
         console.log(error)
     }    
 })
 
+// CREAR NUEVA MASCOTA
 router.get('/crear', (req, res) => {
     res.render('crear');
-})
-router.post('/', async (req, res) => {
+});
+const storage = multer.diskStorage({
+    destination: 'uploads/',
+    filename: function(req,file,cb){
+        cb("", Date.now() + '.' + mimeTypes.extension(file.mimetype))
+    }
+});
+const upload = multer({
+    storage: storage
+});
+router.post('/', upload.single('imagen') , async (req, res) => {
+    req.body = {...req.body, 'imagen': req.file.path}
     const body = req.body;
     try {
         // const mascotaDB = new Mascota(body);

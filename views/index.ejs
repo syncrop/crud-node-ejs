@@ -1,5 +1,19 @@
 <%- include("template/header", {tituloWeb: 'Página de inicio'}) %>
 
-    <h1><%= titulo %></h1>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col"></div>
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Inicio</h5>
+                      <p class="card-text">Esta web es un pequeño ejemplo de CRUD en node.js utilizando EJS. Sería un CRUD de mascotas</p>
+                      <a href="/mascotas" class="btn btn-primary">Ir a Mascotas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
 
 <%- include("template/footer") %>

@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const mascotaSchema = new Schema({
     nombre: String,
-    descripcion: String
+    descripcion: String,
+    imagen: String
 })
 
 //Crear modelo
