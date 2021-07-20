@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const app = express();
 
 app.use(express.static(__dirname+'/public'));
@@ -8,6 +9,7 @@ app.use(express.static(__dirname+'/public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+app.use(methodOverride('_method'));
 
 const port = process.env.port || 3000;
 
@@ -17,11 +19,12 @@ const user = "user";
 const pass = "NIwtZiLrTtoXADso";
 const dbName = "veterinaria";
 const uri = `mongodb+srv://user:NIwtZiLrTtoXADso@cluster0.ojlaz.mongodb.net/veterinaria?retryWrites=true&w=majority`;
-mongoose.connect(uri, 
-    {useNewUrlParser: true, useUnifiedTopology: true}
-)
-    .then(() => console.log('Base de datos conectada'))
-    .catch(e => console.log('error: '+e));
+
+// mongoose.connect(uri, 
+//     {useNewUrlParser: true, useUnifiedTopology: true}
+// )
+//     .then(() => console.log('Base de datos conectada'))
+//     .catch(e => console.log('error: '+e));
 
 //Motor de plantillas
 app.set('view engine', 'ejs');

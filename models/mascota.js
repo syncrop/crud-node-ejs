@@ -2,9 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const mascotaSchema = new Schema({
-    nombre: String,
-    descripcion: String,
-    imagen: String
+    nombre: {
+        type: String,
+        required: true
+    },
+    descripcion: {
+        type: String,   
+        required: true
+    },
+    imagen: {
+        type: String,
+        required: true
+    }
 })
 
 //Crear modelo
