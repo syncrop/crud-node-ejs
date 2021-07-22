@@ -8,7 +8,7 @@
          <a href="/mascotas" class="btn btn-dark btn-block">Volver a Mascotas</a>
         <% } %>
         <% if (!error) { %>
-            <img src="../<%= mascota.imagen  %>" width="450px">
+            <img src="../uploads/<%= mascota.imagen  %>" width="450px">
             <form id="formularioEditar"  data-id="<%= mascota.id  %>">
                 <input 
                     type="text"

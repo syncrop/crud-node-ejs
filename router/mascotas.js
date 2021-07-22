@@ -11,11 +11,6 @@ router.get('/', async(req, res) => {
         const arrayMascotasDB = await Mascota.find()
         res.render("mascotas", {
             arrayMascotas: arrayMascotasDB
-            // arrayMascotas: [
-            //     {id: 'jfasdf', nombre: 'rex', descripcion: 'rex descripcion'},
-            //     {id: 'asdf', nombre: 'chachan', descripcion: 'chachan descripcion'},
-            //     {id: 'jfasdfasdf', nombre: 'toos', descripcion: 'toos descripcion'},
-            // ]
         })
 
     } catch (error) {
@@ -28,7 +23,7 @@ router.get('/crear', (req, res) => {
     res.render('crear');
 });
 const storage = multer.diskStorage({
-    destination: 'uploads/',
+    destination: 'public/uploads/',
     filename: function(req,file,cb){
         cb("", Date.now() + '.' + mimeTypes.extension(file.mimetype))
     }
@@ -37,7 +32,7 @@ const upload = multer({
     storage: storage
 });
 router.post('/', upload.single('imagen') , async (req, res) => {
-    req.body = {...req.body, 'imagen': req.file.path}
+    req.body = {...req.body, 'imagen': req.file.filename}
     const body = req.body;
     try {
         // const mascotaDB = new Mascota(body);
@@ -98,7 +93,6 @@ router.put('/:id', async(req, res) => {
 
     try {
         const mascotaDB = await Mascota.findByIdAndUpdate(_id, body, { useFindAndModify: false});
-        console.log(mascotaDB)
 
         res.json({
             estado: true,
