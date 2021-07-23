@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>Detalle Mascota</h1>
+  <ng-container *ngIf="!mascota">
+    <p>
+      Error al obtener la mascota
+    </p>
+    <a [routerLink]="['/home']" routerLinkActive="router-link-active" class="btn btn-dark btn-block">Volver a
+      Mascotas</a>
+  </ng-container>
+  <ng-container *ngIf="mascota">
+
+    <!-- <img src="../uploads/{{mascota.imagen}}" width="450px"> -->
+    <form enctype="multipart/form-data" [formGroup]="mascotaForm" (ngSubmit)="onSubmit()">
+      <input
+        type="text"
+        value="{{mascota.nombre}}"
+        formControlName="nombre"
+        class="form-control my-2"
+        name="nombre"
+        id="nombreInput">
+      <input
+        type="text"
+        value="{{mascota.descripcion}}"
+        formControlName="descripcion"
+        class="form-control my-2"
+        name="descripcion"
+        id="descripcionInput">
+      <button
+        class="btn btn-warning btn-block"
+        type="submit">
+        Editar
+      </button>
+    </form>
+    <hr>
+    <button class="btn btn-danger btn-block" id="btnEliminar" (click)="deleteMascota(mascota._id)">
+      Eliminar
+    </button>
+    <a class="btn btn-primary btn-block mx-2" [routerLink]="['/home']" routerLinkActive="router-link-active">
+      volver
+    </a>
+  </ng-container>
+</div>

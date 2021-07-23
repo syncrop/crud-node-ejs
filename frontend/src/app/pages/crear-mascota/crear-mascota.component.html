@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Crear</h1>
+  <form action="/mascotas" method="POST" enctype="multipart/form-data" [formGroup]="mascota" (ngSubmit)="onSubmit()">
+      <input
+          type="text"
+          placeholder="Agregar nombre"
+          class="form-control my-2"
+          name="nombre"
+          id="nombre"
+          formControlName="nombre"
+      >
+      <input
+          type="text"
+          placeholder="Agregar descripcion"
+          class="form-control my-2"
+          name="descripcion"
+          formControlName="descripcion"
+      >
+      <input
+          type="file"
+          name="imagen"
+          id=""
+          class="form-control my-2"
+          formControlName="imagen"
+      >
+      <button
+          class="btn btn-success btn-block"
+          type="submit"
+      >
+          Agregar
+      </button>
+      <a
+          class="btn btn-primary btn-block mx-2"
+          [routerLink]="['/home']" routerLinkActive="router-link-active"
+      >
+          Volver
+      </a>
+  </form>
+</div>

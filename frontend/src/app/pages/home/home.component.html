@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>CRUD Mongo</h1>
+  <div class="d-grid gap-2">
+    <a [routerLink]="['/crear']" routerLinkActive="router-link-active"  class="btn btn-success btn-block my-4">
+      Crear Nueva Mascota
+    </a>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="arrayMascotas.length > 0">
+        <tr *ngFor="let mascota of arrayMascotas">
+          <th scope="row">{{ mascota._id }} </th>
+          <td>{{ mascota.nombre }}</td>
+          <td>{{ mascota.descripcion }}</td>
+          <td><a class="btn btn-warning" [routerLink]="['/mascota/' + mascota._id]" routerLinkActive="router-link-active" >Editar</a></td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
