@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Mascota } from 'src/app/shared/interfaces/mascota.interface';
 import { MascotaService } from 'src/app/shared/services/mascota.service';
 
@@ -9,26 +10,42 @@ import { MascotaService } from 'src/app/shared/services/mascota.service';
   styleUrls: ['./crear-mascota.component.scss']
 })
 export class CrearMascotaComponent implements OnInit {
-  mascota = new FormGroup({
-    nombre: new FormControl(''),
-    descripcion: new FormControl(''),
-    imagen: new FormControl('')
-  });
+  form: FormGroup;
 
-  constructor(private mascotaService: MascotaService) { }
+  formData = new FormData()
+
+  constructor(
+    private mascotaService: MascotaService,
+    public fb: FormBuilder,
+    private router: Router
+  ) {
+    this.form = this.fb.group({
+      nombre: [''],
+      descripcion: [''],
+      imagen: [null]
+    })
+   }
 
   ngOnInit(): void {
 
   }
 
+  uploadFile(event): void{
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({
+      imagen: file
+    });
+    this.form.get('imagen').updateValueAndValidity();
+  }
+
   onSubmit(): void{
-    let mascotaSend: Mascota = {
-      nombre: this.mascota.value.nombre,
-      descripcion: this.mascota.value.descripcion,
-      imagen: this.mascota.value.imagen
-    }
-    this.mascotaService.postMascota(mascotaSend).subscribe(
-      resp => console.log(resp),
+    console.log(this.form.value)
+    var formData: any = new FormData();
+    formData.append("nombre", this.form.get('nombre').value);
+    formData.append("descripcion", this.form.get('descripcion').value)
+    formData.append("imagen", this.form.get('imagen').value)
+    this.mascotaService.postMascota(formData).subscribe(
+      resp => this.router.navigate(['/home']),
       err => console.log(err)
     );
   }

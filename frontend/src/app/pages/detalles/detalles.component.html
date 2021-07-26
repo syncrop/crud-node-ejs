@@ -9,7 +9,7 @@
   </ng-container>
   <ng-container *ngIf="mascota">
 
-    <!-- <img src="../uploads/{{mascota.imagen}}" width="450px"> -->
+    <img src="{{mascota.imagen}}" width="450px">
     <form enctype="multipart/form-data" [formGroup]="mascotaForm" (ngSubmit)="onSubmit()">
       <input
         type="text"

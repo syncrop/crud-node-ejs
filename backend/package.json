@@ -2,9 +2,9 @@
   "name": "fundamentos",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^5.0.2",
     "cowsay": "^1.5.0",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "gridfs-stream": "^1.1.1",
@@ -21,6 +22,8 @@
     "mongoose": "^5.13.2",
     "multer": "^1.4.2",
     "multer-gridfs-storage": "^5.0.0",
-    "swagger-ui": "^3.51.1"
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui": "^3.51.1",
+    "swagger-ui-express": "^4.1.6"
   }
 }

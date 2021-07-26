@@ -7,12 +7,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MascotaService {
-  headers= new HttpHeaders({
-    'Access-Control-Allow-Origin':'*',
-    'Authorization':'authkey',
-    'userid':'1'
-  });
-
   constructor(private httpClient: HttpClient) { }
 
   public getMascotas(): Observable<Array<Mascota>>{
