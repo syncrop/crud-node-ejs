@@ -24,7 +24,7 @@ export class DetallesComponent implements OnInit {
     console.log(id);
     this.mascotaService.getMascota(id).subscribe(
       resp => {
-        this.mascota = resp['mascota'];
+        this.mascota = resp['data'];
         this.mascotaForm = new FormGroup({
           nombre: new FormControl(this.mascota.nombre),
           descripcion: new FormControl(this.mascota.descripcion),

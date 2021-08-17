@@ -11,6 +11,7 @@ import { MascotaService } from 'src/app/shared/services/mascota.service';
 })
 export class CrearMascotaComponent implements OnInit {
   form: FormGroup;
+  file: FormGroup;
 
   formData = new FormData()
 
@@ -21,8 +22,10 @@ export class CrearMascotaComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       nombre: [''],
-      descripcion: [''],
-      imagen: [null]
+      descripcion: ['']
+    })
+    this.file = this.fb.group({
+      imagen: ['']
     })
    }
 
@@ -32,20 +35,21 @@ export class CrearMascotaComponent implements OnInit {
 
   uploadFile(event): void{
     const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({
+    this.file.patchValue({
       imagen: file
     });
-    this.form.get('imagen').updateValueAndValidity();
+    this.file.get('imagen').updateValueAndValidity();
   }
 
   onSubmit(): void{
     console.log(this.form.value)
     var formData: any = new FormData();
-    formData.append("nombre", this.form.get('nombre').value);
-    formData.append("descripcion", this.form.get('descripcion').value)
-    formData.append("imagen", this.form.get('imagen').value)
-    this.mascotaService.postMascota(formData).subscribe(
-      resp => this.router.navigate(['/home']),
+    formData.append("imagen", this.file.get('imagen').value)
+    this.mascotaService.postMascota(this.form.value).subscribe(
+      resp => this.mascotaService.uploadImage(resp['data']._id,formData).subscribe(
+        resp => this.router.navigate(['/home']),
+        err => console.log(err)
+      ),
       err => console.log(err)
     );
   }

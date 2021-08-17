@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container text-center">
   <h1>CRUD Mongo</h1>
   <div class="d-grid gap-2">
     <a [routerLink]="['/crear']" routerLinkActive="router-link-active"  class="btn btn-success btn-block my-4">
       Crear Nueva Mascota
     </a>
   </div>
-
-  <table class="table">
+  <div class="spinner-border text-primary" role="status" *ngIf="!arrayMascotas.length">  </div>
+  <table class="table" *ngIf="arrayMascotas.length > 0">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="arrayMascotas.length > 0">
+      <ng-container>
         <tr *ngFor="let mascota of arrayMascotas">
           <th scope="row">{{ mascota._id }} </th>
           <td>{{ mascota.nombre }}</td>

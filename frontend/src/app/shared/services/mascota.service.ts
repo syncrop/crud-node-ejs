@@ -28,4 +28,8 @@ export class MascotaService {
   public deleteMascota(id): Observable<Mascota>{
     return this.httpClient.delete<Mascota>('mascotas/'+id);
   }
+
+  public uploadImage(id, data): Observable<Mascota>{
+    return this.httpClient.put<Mascota>('mascotas/image/'+id, data);
+  }
 }

@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const mascotaController = require('../controllers/mascotaController');
+const mascotaController = require('../controllers/mascota.controller');
 const storage = require('../config/multer');
+const upload = require('../config/gridfs');
 
 
 /**
@@ -79,10 +80,16 @@ const storage = require('../config/multer');
  *        200:
  *          description: Delete
  */
-router.get('/', mascotaController.getMascotas);
-router.get('/:id', mascotaController.getMascota);
-router.post('/', storage.single('imagen'), mascotaController.postMascota);
-router.put('/:id', mascotaController.putMascota);
-router.delete('/:id', mascotaController.deleteMascota);
+// router.get('/', mascotaController.getMascotas);
+// router.get('/:id', mascotaController.getMascota);
+// router.post('/', mascotaController.postMascota);
+// router.put('/:id', mascotaController.putMascota);
+// router.put('/image/:id', storage.single('imagen'), mascotaController.uploadImageMascota);
+// router.delete('/:id', mascotaController.deleteMascota);
+
+router.post('/gridf', upload.single('imagen'), mascotaController.gridf);
+router.get('/gridf', mascotaController.getGridf);
+router.get('/image/:filename', mascotaController.getImage);
+router.delete('/image/:id', mascotaController.deleteImage);
 
 module.exports = router;

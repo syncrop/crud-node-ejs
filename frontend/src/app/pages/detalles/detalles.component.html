@@ -1,5 +1,7 @@
-<div class="container">
+<div class="container text-center">
   <h1>Detalle Mascota</h1>
+  <div class="spinner-border text-primary" role="status" *ngIf="!mascota">  </div>
+
   <ng-container *ngIf="!mascota">
     <p>
       Error al obtener la mascota
@@ -10,7 +12,7 @@
   <ng-container *ngIf="mascota">
 
     <img src="{{mascota.imagen}}" width="450px">
-    <form enctype="multipart/form-data" [formGroup]="mascotaForm" (ngSubmit)="onSubmit()">
+    <form enctype="multipart/form-data " [formGroup]="mascotaForm" (ngSubmit)="onSubmit()">
       <input
         type="text"
         value="{{mascota.nombre}}"
@@ -25,11 +27,13 @@
         class="form-control my-2"
         name="descripcion"
         id="descripcionInput">
-      <button
-        class="btn btn-warning btn-block"
-        type="submit">
-        Editar
-      </button>
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-warning btn-block"
+          type="submit">
+          Editar
+        </button>
+      </div>
     </form>
     <hr>
     <button class="btn btn-danger btn-block" id="btnEliminar" (click)="deleteMascota(mascota._id)">
